@@ -1,0 +1,126 @@
+```{r}
+#import libraries
+library(wordcloud)
+```
+
+```{r}
+library(RColorBrewer)
+library(tm)
+```
+
+```{r}
+library(kableExtra)
+library(readr)
+library(ggplot2)
+```
+
+```{r}
+library(stringr)
+library(tidyselect)
+library(tidyverse)
+```
+
+```{r}
+library(readr)
+TextData <- read_csv("TextData.csv")
+```
+
+```{r}
+TextData<-TextData[sample(1:nrow(TextData), 10000),]
+```
+
+
+```{r}
+TextData_features=colnames(TextData)
+TextData_features
+```
+
+```{r}
+features_continous<-vector()
+for (i in TextData_features){
+  print(paste("The unique values for feature",i, "are :",length(unique(TextData[[i]]))))
+}
+```
+```{r}
+colnames(TextData)
+```
+
+```{r}
+str(TextData)
+```
+
+```{r}
+library('dplyr')
+na_count1 <-sapply(TextData, function(y) sum(length(which(is.na(y)))))
+na_count1 <- data.frame(na_count1)
+na_count1
+```
+
+```{r}
+TextData<-select(TextData,-agenda)
+TextData<-drop_na(TextData)
+table(TextData$party)
+```
+
+```{r}
+attach(TextData)
+table(TextData$iso3country)
+```
+
+```{r}
+TextData$party<-as.factor(TextData$party)
+TextData$Text_Length<-nchar(TextData$text,allowNA = T)
+
+hist(TextData$Text_Length, col = rainbow(7))
+```
+
+```{r}
+library(ggplot2)
+ggplot(TextData, aes(x=Text_Length, fill=party))+
+  geom_histogram()+
+  stat_bin(bins = 30)
+```
+
+```{r}
+Debates<-TextData%>%
+  group_by(party)%>%
+  summarise(Number_Debates=n())
+```
+
+```{r}
+kable(Debates, "html") %>%
+    kable_styling() %>%
+    scroll_box(height = "200px")
+```
+
+```{r}
+Text_Corpus<-Corpus(VectorSource(TextData$text)) 
+#Text_Corpus<-Corpus(VectorSource(TextData$text)) 
+print(Text_Corpus[1:2])
+```
+
+```{r}
+inspect(Text_Corpus[1:3])
+```
+
+```{r}
+toSpace <- content_transformer(function(x, pattern) {return (gsub(pattern,"",x))})
+# Apply it for substituting the regular expression given in one of the former answers by " "
+#Text_Corpus<- tm_map(Text_Corpus,toSpace,"[[:graph:]]")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
