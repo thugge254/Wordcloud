@@ -102,6 +102,28 @@ Labour MPs
 LibDem MPs
 SNP, DUP, and others
 
-![WC](wc.png)
-![WC](wc_1.png)
+#### Lab Party
+
+![WC](lab.png)
+
+#### LibDem Party
+![WC](libdem.png)
+
+#### DUP Party
 ![WC](wc_2.png)
+
+### Author
+Moses Chege
+
+#### Data Analyst | SQL • Python • R • Excel | Turning Data into Actionable Insights
+### Skills
+- R $ R Markdown
+- Data Cleaning 
+- Text Analysis
+- Data Visualization
+
+#### GitHub Repository:
+https://github.com/thugge254/Wordcloud
+
+### License
+This project is open-source and available under the MIT License.
